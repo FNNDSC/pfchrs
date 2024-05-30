@@ -1,0 +1,26 @@
+#
+# HOWTORUN
+#
+
+# Build (for fish shell syntax!)
+set UID (id -u)
+docker build --build-arg UID=$UID -t local/pfms .
+
+SESSIONUSER=localhost
+
+
+# For daemon, or background mode:
+docker run --gpus all --privileged                                  \
+        --env SESSIONUSER=$SESSIONUSER                              \
+        --name pfms  --rm -it -d                                    \
+        -p 2024:2024 	                                              \
+        local/pfms /start-reload.sh
+
+# Run with support for source debugging
+docker run --gpus all --privileged                                  \
+        --env SESSIONUSER=$SESSIONUSER                              \
+        --name pfms  --rm -it                                       \
+        -p 2024:2024 	                                              \
+        -v $PWD/pfms:/app:ro                                        \
+        local/pfms /start-reload.sh
+

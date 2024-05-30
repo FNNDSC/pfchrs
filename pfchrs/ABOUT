@@ -1,0 +1,3 @@
+`pfchrs` is a simple fastAPI wrapper about a CLI `chrs` process. It is intended as a technology demonstration and not intended to be production in its current form. Simply stated, `pfchrs` provides an API endpoint for free form text that is captured, run through `chrs` and the response is returned.
+
+API documentation is available at :2025/docs

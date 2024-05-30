@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pfms
+  namespace: pfms
+  labels:
+    app: pfms
+    app.kubernetes.io/component: pfms
+    app.kubernetes.io/instance: pfms
+    app.kubernetes.io/name: pfms
+    app.kubernetes.io/part-of: pfms
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+spec:
+  ports:
+    - name: 2024-tcp
+      protocol: TCP
+      port: 2024
+      targetPort: 2024
+    - name: 80-tcp
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: pfms
+    deployment: pfms
+  type: ClusterIP
+  sessionAffinity: None
+  internalTrafficPolicy: Cluster
+  ipFamilyPolicy: SingleStack
+status:
+  loadBalancer: {}

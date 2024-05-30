@@ -1,0 +1,34 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: pfms
+  namespace: pfms
+  labels:
+    app: pfms
+    app.kubernetes.io/component: pfms
+    app.kubernetes.io/instance: pfms
+    app.kubernetes.io/name: pfms
+    app.kubernetes.io/part-of: pfms
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  host: pfms-pfms.apps.cluster-62d8m.sandbox2594.opentlc.com
+  to:
+    kind: Service
+    name: pfms
+    weight: 100
+  port:
+    targetPort: 2024-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: pfms-pfms.apps.cluster-62d8m.sandbox2594.opentlc.com
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2024-05-03T05:08:42Z'
+      wildcardPolicy: None

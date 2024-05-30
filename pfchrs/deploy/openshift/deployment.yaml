@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pfms
+  labels:
+    app: pfms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pfms
+  template:
+    metadata:
+      labels:
+        app: pfms
+        deployment: pfms
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+    spec:
+      containers:
+        - name: pfms
+          image: image-registry.openshift-image-registry.svc:5000/pfms/pfms@sha256:23e041886d4c33260d3817fd2f003a2aba5662f65755fb25350d38ee10932e7e
+          ports:
+            - containerPort: 2024
+              protocol: TCP
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            limits:
+              nvidia.com/gpu: '1'
+            requests:
+              nvidia.com/gpu: '1'
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      schedulerName: default-scheduler
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+          effect: NoSchedule
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
