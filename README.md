@@ -11,7 +11,7 @@
 
 ## Conceptualization
 
-A fuller experience closer to the imagined goal is to use the `[chrs_web](https://github.com/FNNDSC/chrs_web)`.
+A fuller experience closer to the imagined goal is to use the [chrs_web](https://github.com/FNNDSC/chrs_web) interface that provides an interactive "terminal", sends commands to `pfchrs` and renders results.
 
 
 ## `pfchrs` Deployment
