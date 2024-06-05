@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/FNNDSC/pfchrs/actions/workflows/build.yml/badge.svg)](https://github.com/FNNDSC/pfchrs/actions/workflows/build.yml)
 
-*a FastAPI REST service that provides somewhat bespoke inference services on medical data*
+*a FAST API REST service about an embedded chrs application -- basically a web-based chrs*
 
 ## Abstract
 
